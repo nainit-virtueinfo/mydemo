@@ -2,7 +2,7 @@
 
 ![project](https://github.com/verma-kunal/Cloud-Deployment-Automation/assets/72245772/e64c29b3-615c-451e-b8fa-b2affdec04cf)
 
-## Testing the project locally viinfo
+## Testing the project locally
 
 1. Clone this project
 ```
