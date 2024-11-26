@@ -26,11 +26,13 @@ pipeline {
             steps {
                 script {
                     sh """
-                    CONTAINER_ID=\$(sudo docker ps -q --filter "ancestor=${registry}" --filter "publish=3000")
-                    if [ "\$CONTAINER_ID" != "" ]; then
+                    CONTAINER_ID=\$(sudo docker ps -q --filter "ancestor=${registry}:${commitHash}" --filter "publish=3000")
+                    if [ -n "\$CONTAINER_ID" ]; then
                         echo "Stopping and removing existing container..."
                         sudo docker stop \$CONTAINER_ID
                         sudo docker rm \$CONTAINER_ID
+                    else
+                        echo "No container found using image ${registry}:${commitHash} or port 3000."
                     fi
                     """
                 }
