@@ -7,7 +7,7 @@ pipeline {
     }
     environment{
         
-        registry = "vkunal/aws-app"
+        registry = "nainitkalariya/mydemo"
         registryCredential = 'dockerhub' 
         commitHash = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
        
