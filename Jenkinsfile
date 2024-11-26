@@ -25,13 +25,12 @@ pipeline {
         stage('Stop and Remove Old Container') {
             steps {
                 script {
-                    // Stop and remove any container running on port 3000
                     sh """
-                    CONTAINER_ID=\$(docker ps -q --filter "ancestor=${registry}" --filter "publish=3000")
+                    CONTAINER_ID=\$(sudo docker ps -q --filter "ancestor=${registry}" --filter "publish=3000")
                     if [ "\$CONTAINER_ID" != "" ]; then
                         echo "Stopping and removing existing container..."
-                        docker stop \$CONTAINER_ID
-                        docker rm \$CONTAINER_ID
+                        sudo docker stop \$CONTAINER_ID
+                        sudo docker rm \$CONTAINER_ID
                     fi
                     """
                 }
@@ -41,7 +40,6 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    // Run the new container
                     sh "sudo docker run -dp 3000:3000 ${registry}:${commitHash}"
                 }
             }
@@ -51,7 +49,7 @@ pipeline {
             steps {
                 script {
                     docker.withRegistry('https://index.docker.io/v1/', registryCredential) {
-                        sh "docker push ${registry}:${commitHash}"
+                        sh "sudo docker push ${registry}:${commitHash}"
                     }
                 }
             }
