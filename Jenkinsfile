@@ -26,15 +26,15 @@ pipeline {
             steps {
                 script {
                     sh """
-                    # Find the container using the current image and tag
-                    CONTAINER_ID=\$(sudo docker ps -q --filter "ancestor=${registry}:${commitHash}")
+                    # Identify any container running on port 3000
+                    RUNNING_CONTAINER=\$(sudo docker ps -q --filter "publish=3000")
                     
-                    if [ -n "\$CONTAINER_ID" ]; then
-                        echo "Stopping and removing container with tag ${commitHash}..."
-                        sudo docker stop \$CONTAINER_ID
-                        sudo docker rm \$CONTAINER_ID
+                    if [ -n "\$RUNNING_CONTAINER" ]; then
+                        echo "Stopping and removing container running on port 3000..."
+                        sudo docker stop \$RUNNING_CONTAINER
+                        sudo docker rm \$RUNNING_CONTAINER
                     else
-                        echo "No container found using image ${registry}:${commitHash}."
+                        echo "No container is currently running on port 3000."
                     fi
                     """
                 }
