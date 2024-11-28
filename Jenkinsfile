@@ -8,7 +8,7 @@ pipeline {
 
     environment {
         registry = "nainitkalariya/mydemo"
-        registryCredential = 'dockerhub'
+        registryCredential = '89012819-c5fc-4338-b0b9-f4c56da4f137'
         commitHash = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
     }
 
