@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "mydemo",
-            "image": "nainitkalariya/mydemo",
+            "image": "<IMAGE1_NAME>",
             "essential": true,
             "portMappings": [
                 {
