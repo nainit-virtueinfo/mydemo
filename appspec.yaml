@@ -3,8 +3,8 @@ Resources:
   - TargetService:
       Type: AWS::ECS::Service
       Properties:
-        TaskDefinition: <TASK_DEFINITION>
+        TaskDefinition: ecs-demo:2
         LoadBalancerInfo:
-          ContainerName: "sample-website"
+          ContainerName: "mydemo"
           ContainerPort: 80
 
